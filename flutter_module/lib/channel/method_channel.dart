@@ -23,4 +23,21 @@ class MethodChannelHelper {
     params['route'] = route;
     _channel.invokeMethod("startNativePage", params);
   }
+
+  // 原生调用Flutter
+  void initChannel() {
+    // nativeCallFlutter 注册渠道
+    _channel.setMethodCallHandler((call) async {
+      await handleNativeMethodCall(call);
+    });
+  }
+
+  /// 处理原生方法调用
+  Future<void> handleNativeMethodCall(MethodCall call) async {
+    switch(call.method) {
+      case "methodName": //方法名
+        final arguments = call.arguments; //参数
+        break;
+    }
+  }
 }

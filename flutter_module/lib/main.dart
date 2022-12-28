@@ -4,8 +4,11 @@ import 'package:flutter_boost/flutter_boost.dart';
 import 'package:flutter_module/custom_flutter_binding.dart';
 import 'package:flutter_module/routes/route_maps.dart';
 
-void main() {
+import 'channel/method_channel.dart';
+
+void main() async {
   CustomFlutterBinding();
+  MethodChannelHelper().initChannel();
   runApp(const MyApp());
 }
 
@@ -16,14 +19,12 @@ class MyApp extends StatefulWidget {
   State<StatefulWidget> createState() {
     return _MyAppState();
   }
-
 }
 
 class _MyAppState extends State<MyApp> {
-
   Route<dynamic>? routeFactory(RouteSettings settings, String? uniqueId) {
     FlutterBoostRouteFactory? func = RouteMap.routerMap[settings.name];
-    if(func == null) {
+    if (func == null) {
       return null;
     }
     return func(settings, uniqueId);
@@ -48,5 +49,4 @@ class _MyAppState extends State<MyApp> {
       appBuilder: appBuilder,
     );
   }
-
 }
